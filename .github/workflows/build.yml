@@ -18,6 +18,11 @@ jobs:
         run: chmod +x ./gradlew
       - name: Generate TypeScript schema classes
         run: ./gradlew generateTypeScriptSchemaClasses
+      - name: Capture codes
+        uses: actions/upload-artifact@main
+        with:
+          name: Codes
+          path: website/
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -26,8 +31,8 @@ jobs:
         run: npm ci --prefix website
       - name: Build Angular
         run: npm run build --prefix website
-      - name: Capture main build artifact
+      - name: Capture dist
         uses: actions/upload-artifact@main
         with:
-          name: Main
+          name: Dist
           path: website/dist/website/browser/
