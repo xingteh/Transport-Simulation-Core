@@ -26,20 +26,8 @@ jobs:
         run: npm ci --prefix website
       - name: Build Angular
         run: npm run build --prefix website
-      - name: Generate Java schema classes
-        run: ./gradlew generateJavaSchemaClasses
-      - name: Build
-        run: ./gradlew build buildSrc:build -x test
-      # Tests don't work for some reason
-      # - name: Run JUnits
-      #   run: ./gradlew test
       - name: Capture main build artifact
         uses: actions/upload-artifact@main
         with:
           name: Main
-          path: build/libs/
-      - name: Capture JSON schema generator build artifact
-        uses: actions/upload-artifact@main
-        with:
-          name: JSON Schema Generator
-          path: buildSrc/build/libs/
+          path: dist/osm/browser/
